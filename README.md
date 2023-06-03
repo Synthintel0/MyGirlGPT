@@ -7,9 +7,17 @@ Click the image below to watch a demo:
 
 [![Demo Video](http://img.youtube.com/vi/GlDwTl__UDs/0.jpg)](https://www.youtube.com/watch?v=GlDwTl__UDs "Demo Video")
 
-## Code Release Coming Soon!!!
+## Public Telegram Bot
+Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! Click [MyGirlGPTCommunity](https://t.me/MyGirlGPTCommunity) to join.
 
-## Public Telegram Bot Coming Soon!!!
+### How to use telegram bot
+- In the group, use `@mygirlgpt_bot` to talk to Cherry. 
+- Want to hear Cherry's voice? Just use the /voice command to switch it on or off.
+- want a selfie? Just send  "send me a pic" or "send me your selfie", and it'll be on its way!
+
+![chat example](imgs/chat.png)
+
+## Still working hard to release the code!!!
 
 ## Features
 * Telegram Integration: Connect directly with your AI girlfriend through Telegram, allowing you to send and receive messages seamlessly.
