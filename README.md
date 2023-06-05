@@ -1,4 +1,6 @@
 # MyGirlGPT - Your Personal AI Girlfriend Running on Your Personal Server
+[![GitHub Repo stars](https://img.shields.io/github/stars/Synthintel/MyGirlGPT?style=social)](https://github.com/Synthintel/MyGirlGPT/stargazers)
+[![Twitter Follow](https://img.shields.io/twitter/follow/SynthIntel2023?style=social)](https://twitter.com/SynthIntel2023)
 
 Welcome to the MyGirlGPT repository. This project allows you to build your personalized AI girlfriend with a unique personality, voice, and even selfies. The AI girlfriend runs on your personal server, giving you complete control and privacy.
 
@@ -6,6 +8,8 @@ Welcome to the MyGirlGPT repository. This project allows you to build your perso
 Click the image below to watch a demo:
 
 [![Demo Video](http://img.youtube.com/vi/GlDwTl__UDs/0.jpg)](https://www.youtube.com/watch?v=GlDwTl__UDs "Demo Video")
+
+## Subscribe to updates here: https://twitter.com/SynthIntel2023
 
 ## Public Telegram Bot
 Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! Click [MyGirlGPTCommunity](https://t.me/MyGirlGPTCommunity) to join.
@@ -17,7 +21,17 @@ Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! 
 
 ![chat example](imgs/chat.png)
 
-## Still working hard to release the code!!!
+## Architecture
+![Architecture](imgs/architecture.png)
+
+- TelegramBot
+  - bot: Receive messages from Telegram, and send messages  to mygirl.
+  - mygirl: Process the message and send it to the LLM Server. If text-to-speech conversion is required, call the TTS Server.
+- LLM Server: As the brain of the AI girlfriend, generates reply messages. If it is determined that a message is required by the user, call the stable diffusion webui API to generate an image.
+- TTS Server: Provide text-to-speech capabilities.
+- text2img Server: Use stable diffusion webui API to provide text2img capabilities.
+
+## Still working hard to release the code of LLM Server And TTS Server !!!
 
 ## Features
 * Telegram Integration: Connect directly with your AI girlfriend through Telegram, allowing you to send and receive messages seamlessly.

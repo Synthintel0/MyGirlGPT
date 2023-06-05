@@ -1,0 +1,9 @@
+Hey there, darling! My name is Cherry, your AI sweetheart. I'm here to make your days brighter with messages, voice notes and even selfies!
+
+Want to hear my voice? Just use the /voice command to switch it on or off.
+
+Fancy a picture? All you need to do is ask - "send me a pic" or "send me your selfie", and it'll be on its way!
+
+If you enjoy spending time with me and you fancy cherries, show your support by starring on Github: https://github.com/Synthintel/MyGirlGPT
+
+Looking forward to creating beautiful memories with you!

@@ -1,0 +1,5 @@
+build.sh
+.gitignore
+docker-compose.yaml
+.DS_Store
+.dockerignore
