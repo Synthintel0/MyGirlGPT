@@ -37,6 +37,7 @@ Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! 
 * Telegram Integration: Connect directly with your AI girlfriend through Telegram, allowing you to send and receive messages seamlessly.
 * Local Large Language Model (LLM): Powered by [text-generation-webui](https://github.com/oobabooga/text-generation-webui) with better privacy protection.
 * Personality Customization: Tailor the AI's personality to your preferences, making her a perfect match for you.
+The model is [TehVenom/Pygmalion-Vicuna-1.1-7b](https://huggingface.co/TehVenom/Pygmalion-Vicuna-1.1-7b)
 * Voice Generation: Utilize [Bark](https://github.com/suno-ai/bark) to generate a voice for your AI model, enhancing the immersive experience.
 * Selfie Generation: Your AI girlfriend is capable of generating photorealistic selfies upon request, powered by [Stable Diffusion web UI](https://github.com/AUTOMATIC1111/stable-diffusion-webui).
 
@@ -54,3 +55,4 @@ This project is licensed under the MIT License.
 - [Stable Diffusion web UI](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 - [Bark](https://github.com/suno-ai/bark)
 - [text-generation-webui](https://github.com/oobabooga/text-generation-webui)
+- [TehVenom/Pygmalion-Vicuna-1.1-7b](https://huggingface.co/TehVenom/Pygmalion-Vicuna-1.1-7b)
