@@ -4,6 +4,8 @@
 
 Welcome to the MyGirlGPT repository. This project allows you to build your personalized AI girlfriend with a unique personality, voice, and even selfies. The AI girlfriend runs on your personal server, giving you complete control and privacy.
 
+MyGirlGPT is AI agent deploy on the [OpenDAN-Personal-AI-OS](https://github.com/fiatrete/OpenDAN-Personal-AI-OS)
+
 ## Demo
 Click the image below to watch a demo:
 
