@@ -1,5 +1,5 @@
 # MyGirlGPT - Your Personal AI Girlfriend Running on Your Personal Server
-[![GitHub Repo stars](https://img.shields.io/github/stars/Synthintel/MyGirlGPT?style=social)](https://github.com/Synthintel/MyGirlGPT/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/Synthintel0/MyGirlGPT?style=social)](https://github.com/Synthintel0/MyGirlGPT/stargazers)
 [![Twitter Follow](https://img.shields.io/twitter/follow/SynthIntel2023?style=social)](https://twitter.com/SynthIntel2023)
 [![Twitter Follow](https://img.shields.io/twitter/follow/MyGirlGPT?style=social)](https://twitter.com/MyGirlGPT)
 
