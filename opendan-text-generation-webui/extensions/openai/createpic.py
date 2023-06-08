@@ -168,6 +168,16 @@ def get_sd_pictures(description):
     }
     logging.info(f'prompt: {payload["prompt"]}')
 
+    if 'laying' in payload["prompt"] or 'lying' in payload["prompt"]:
+        pass
+    else:
+        if random.random() < 0.5:
+            logging.info('use controlnet')
+            payload['alwayson_scripts'] = get_control_net_params('openpose')
+        else:
+            logging.info('does not use controlnet')
+            pass
+
     num_retries = 3
     for attempt in range(num_retries):
         try:
@@ -185,6 +195,39 @@ def get_sd_pictures(description):
         img_str = r.get('images')[0]
         visible_result = img_str
     return visible_result
+
+def get_control_net_params(preprocess):
+    cnetImage = get_random_img_file()
+    if preprocess == 'openpose':
+        params = {
+            "ControlNet": {
+                "args": [{
+                    "input_image": cnetImage,
+                    "module": 'openpose',
+                    "model": 'control_v11p_sd15_openpose',
+                    "weight": 1,
+                    "resize_mode": 2,
+                    "lowvram": False,
+                    "processor_res": 512,
+                    "guidance_start": 0,
+                    "guidance_end": 1,
+                    "guessmode": False
+                }]
+            }
+        }
+    return params
+
+def get_random_img_file():
+    random_number = random.randint(0, 3)
+    logging.info(f'random pose: {random_number}')
+    filepath = f'extensions/openai/imgs/{random_number}.png'
+    return load_image_file_as_base64(filepath)
+
+def load_image_file_as_base64(file):
+    img = None
+    with open(file, "rb") as f:
+        img = base64.b64encode(f.read()).decode()
+    return img
 
 def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0):
     num_retries = 3
