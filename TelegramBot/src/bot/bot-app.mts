@@ -275,17 +275,36 @@ class BotApp {
       }
 
       const { type, content } = data.message
-      if (type === 'text') {
-        const markdownContent = beautifyMarkdown(content)
-        await ctx
-          .reply(markdownContent, {
-            parse_mode: 'Markdown',
-          })
-          .catch(() => {})
-      } else if (type === 'image') {
-        await ctx.replyWithPhoto(new InputFile(Buffer.from(base64.toByteArray(content)))).catch(() => {})
-      } else if (type === 'voice') {
-        await ctx.replyWithVoice(new InputFile(Buffer.from(base64.toByteArray(content)))).catch(() => {})
+      const chatType = ctx.message.chat.type
+      if (chatType === 'group' || chatType === 'supergroup'){
+        const replyToMessageId = ctx.message.message_id
+        if (type === 'text') {
+          const markdownContent = beautifyMarkdown(content)
+          await ctx
+            .reply(markdownContent, {
+              parse_mode: 'Markdown',
+              reply_to_message_id: replyToMessageId
+            })
+            .catch(() => {})
+        } else if (type === 'image') {
+          await ctx.replyWithPhoto(new InputFile(Buffer.from(base64.toByteArray(content))), {reply_to_message_id: replyToMessageId}).catch(() => {})
+        } else if (type === 'voice') {
+          await ctx.replyWithVoice(new InputFile(Buffer.from(base64.toByteArray(content))), {reply_to_message_id: replyToMessageId}).catch(() => {})
+        }
+      }else{
+        if (type === 'text') {
+          const replyToMessageId = ctx.message.message_id
+          const markdownContent = beautifyMarkdown(content)
+          await ctx
+            .reply(markdownContent, {
+              parse_mode: 'Markdown',
+            })
+            .catch(() => {})
+        } else if (type === 'image') {
+          await ctx.replyWithPhoto(new InputFile(Buffer.from(base64.toByteArray(content)))).catch(() => {})
+        } else if (type === 'voice') {
+          await ctx.replyWithVoice(new InputFile(Buffer.from(base64.toByteArray(content)))).catch(() => {})
+        }
       }
     }
   }
