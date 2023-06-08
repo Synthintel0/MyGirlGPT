@@ -24,7 +24,10 @@ Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! 
 
 ![chat example](imgs/chat.png)
 
+
 ## Architecture
+<details>
+  <summary>The Architecture of Project </summary>
 ![Architecture](imgs/architecture.png)
 
 - TelegramBot
@@ -33,6 +36,7 @@ Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! 
 - LLM Server: As the brain of the AI girlfriend, generates reply messages. If it is determined that a message is required by the user, call the stable diffusion webui API to generate an image.
 - TTS Server: Provide text-to-speech capabilities.
 - text2img Server: Use stable diffusion webui API to provide text2img capabilities.
+</details>
 
 ## Still working hard to release the code of TTS Server !!!
 
