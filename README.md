@@ -26,8 +26,10 @@ Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! 
 
 
 ## Architecture
+
 <details>
   <summary>The Architecture of Project </summary>
+
 ![Architecture](imgs/architecture.png)
 
 - TelegramBot
