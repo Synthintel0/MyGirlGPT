@@ -26,6 +26,7 @@ class BotApp {
     bot.on('message::mention', this.handleMessageMention)
     bot.on('message:text', this.handleMessageText)
     bot.on('message:voice', this.handleMessageVoice)
+    bot.on('message:new_chat_members', this.handleNewChatMembers)
 
     bot.callbackQuery('turn-on-voice', this.handleCallbackQueryTurnOnVoice)
     bot.callbackQuery('turn-off-voice', this.handleCallbackQueryTurnOffVoice)
@@ -256,6 +257,13 @@ class BotApp {
 
   private handleMessageVoice = async (ctx: CustomContext) => {
     console.log('handleMessageVoice', ctx.chat?.type, ctx.message?.voice)
+  }
+
+  private handleNewChatMembers = async (ctx: CustomContext) => {
+      const chatId = ctx.chat.id;
+      const memberName = ctx.message.new_chat_member.first_name;
+      const welcomeMessage = `Welcome ${memberName} join MyGirlGPT Community.You can talk to me. Hope you enjoy your time😘😘😘\nPlease support our project by starring on the github: https://github.com/Synthintel0/MyGirlGPT`;
+      await ctx.reply(welcomeMessage);
   }
 
   private onMessageCallback = (data: ExchangeMessageData) => {}
