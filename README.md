@@ -55,8 +55,19 @@ The model is [TehVenom/Pygmalion-Vicuna-1.1-7b](https://huggingface.co/TehVenom/
 * Selfie Generation: Your AI girlfriend is capable of generating photorealistic selfies upon request, powered by [Stable Diffusion web UI](https://github.com/AUTOMATIC1111/stable-diffusion-webui).
 
 ## Roadmap
-* Video Capability: Soon, your AI girlfriend will be able to send you videos of herself, further enriching the interaction.
-* Discord Integration: Connect your AI girlfriend to Discord, expanding the platforms where you can interact with her.
+* Long-Term Memory: Enable MyGirlGPT to "remember" conversations long-term, which will enhance the depth and continuity of your interactions.
+* Video Messages: Your AI girlfriend will be able to send you videos of herself, providing a more immersive and engaging experience.
+* Discord Bot: Connect your AI girlfriend to Discord, expanding the platforms where you can interact with her.
+* LLM for SD prompts: Replacing GPT-3.5 with a local LLM to generate prompts for SD.
+* Switch Personality: Allow users to switch between different personalities for AI girlfriend, providing more variety and customization options for the user experience.
+
+## FAQ
+1. **Q:** How much vram would you recommend to run this locally?
+
+   **A:** The system requires approximately 36GB VRAM, with 15-17GB for the LLM Server, 7GB for the TTS Server, and 11GB for the stable diffusion webui.
+2. **Q:** Why cherry refuses but still send pictures?
+
+   **A:** Sending pictures depends on your message, and for now we won't consider Cherry's opinion. So what you see is her rejecting your request, but you will still receive the photos. Next version, send picture will base on cherry's opition. Once Cherry says no, you will not get the picture. This will make her like human more.
 
 ## Contributing
 We welcome pull requests. If you plan to make significant changes, please open an issue first to discuss them.
