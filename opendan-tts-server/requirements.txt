@@ -1,0 +1,5 @@
+fastapi==0.95.2
+bark==0.1.5
+uvicorn==0.22.0
+nltk==3.8.1
+soundfile==0.12.1
