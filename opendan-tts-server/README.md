@@ -23,3 +23,9 @@ python -m nltk.downloader punkt
 cd src
 python main.py
 ```
+
+### How to run in docker
+```
+docker build -t opendan-tts-server .
+docker run -d --name tts-server -p 6006:6006 opendan-tts-server 
+```
