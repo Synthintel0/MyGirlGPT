@@ -40,11 +40,10 @@ Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! 
 - text2img Server: Use stable diffusion webui API to provide text2img capabilities.
 </details>
 
-## Still working hard to release the code of TTS Server !!!
-
 ## How to run
 - [How to run LLM Server](docs/LLM.md)
 - [How to run TelegramBot](TelegramBot/README.md)
+- [How to run TTS Server](opendan-tts-server/README.md)
 
 ## Features
 * Telegram Integration: Connect directly with your AI girlfriend through Telegram, allowing you to send and receive messages seamlessly.
