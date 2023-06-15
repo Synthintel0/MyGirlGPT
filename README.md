@@ -33,17 +33,26 @@ Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! 
 ![Architecture](imgs/architecture.png)
 
 - TelegramBot
-  - bot: Receive messages from Telegram, and send messages  to mygirl.
+  - bot: Receive messages from Telegram, and send messages to mygirl.
   - mygirl: Process the message and send it to the LLM Server. If text-to-speech conversion is required, call the TTS Server.
 - LLM Server: As the brain of the AI girlfriend, generates reply messages. If it is determined that a message is required by the user, call the stable diffusion webui API to generate an image.
 - TTS Server: Provide text-to-speech capabilities.
 - text2img Server: Use stable diffusion webui API to provide text2img capabilities.
 </details>
 
-## How to run
-- [How to run LLM Server](docs/LLM.md)
-- [How to run TelegramBot](TelegramBot/README.md)
-- [How to run TTS Server](opendan-tts-server/README.md)
+## How to run on your personal server
+1. Start the Stable Diffusion Webui  
+   Start with the `--api` argument. If you're deploying the service across multiple devices, you'll also need to add the `--listen` argument. 
+   The SD Webui will now be listening on port `7860`.  
+   You'll have your configuration: `SD_ADDRESS='http://stablediffusion:7860'`, this will be used in the next step.
+2. Start the LLM Server  
+   Follow the instructions outlined in the [How to run LLM Server](docs/LLM.md). Once the server is running.The LLM Server will be running on port `5001`.   
+3. Start the TTS Server  
+   Follow the instructions outlined in the [How to run TTS Server](opendan-tts-server/README.md). Once the server is running, it will be listening on port `6006`.
+4. Start the TelegramBot  
+   You should now have the `GPT_SERVER=http://LLM-SERVER:5001` and `TTS_SERVER=http://TTS-SREVER:6006`.  
+   Follow the instructions outlined in the [How to run TelegramBot](TelegramBot/README.md) to start the bot.  
+Now you can have fun chatting with your AI girl!!!
 
 ## Features
 * Telegram Integration: Connect directly with your AI girlfriend through Telegram, allowing you to send and receive messages seamlessly.
