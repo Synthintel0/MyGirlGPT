@@ -27,6 +27,7 @@ START_COMMAND_REPLY_PHOTO='./src/assets/hello.jpg' # file path
 WEBSOCKET_SERVER="ADDRESS OF BOT"
 GPT_SERVER="OPENAI API ADDRESS OF TEXT-GENERATION-WEBUI"
 TTS_SERVER="ADDRESS FOR TTS"
+CONVERSATION_COUNT_THRESHOLD=100 # Maximum number of historical conversations that will be sent to GPT
 ```
 
 ## Run the bot & mygirl

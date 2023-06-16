@@ -12,6 +12,7 @@ services:
       START_COMMAND_REPLY_TEXT: './src/assets/hello.txt'
       START_COMMAND_REPLY_VOICE: './src/assets/hello.oga'
       START_COMMAND_REPLY_PHOTO: './src/assets/hello.jpg'
+      CONVERSATION_COUNT_THRESHOLD: 100
     ports:
       - 8081:8081
     restart: unless-stopped

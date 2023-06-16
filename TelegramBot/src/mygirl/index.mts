@@ -18,11 +18,16 @@ class App {
     websocketClient.onMessageRequest(this.handleMessageRequest)
 
     this.websocketClient = websocketClient
+
+    this.parentMsgThreshold = parseInt(process.env.CONVERSATION_COUNT_THRESHOLD as string, 10)
   }
 
   private websocketClient: WebsocketClient
 
   private parentMessageIds: Map<string, string> = new Map()
+
+  private parentMsgIdsMap: Map<string, string[]> = new Map()
+  private parentMsgThreshold = 100
 
   private handleMessageRequest = (data: ExchangeMessageData) => {
     console.log('handleMessageRequest', data)
@@ -46,6 +51,7 @@ class App {
         .then((result) => {
           console.log('chatGPTAPI.sendMessage result', result)
           this.parentMessageIds.set(data.chat.id, result.id)
+          this.checkAndUpdateParentMsg(data.chat.id, result.id)
 
           const { content: textContent, imageBase64: imageContent } = JSON.parse(result.text) as GPTResponseData
           const textContentParts = splitParagraphToShorterParts(textContent)
@@ -115,6 +121,28 @@ class App {
         .catch((e) => {
           console.log('chatGPTAPI.sendMessage error', e)
         })
+    }
+  }
+
+  private checkAndUpdateParentMsg = (chatId: string, parentId: string) => {
+    if (this.parentMsgIdsMap.get(chatId) == undefined) {
+      let msgIds: string [] = []
+      msgIds.push(parentId)
+      this.parentMsgIdsMap.set(chatId, msgIds)
+    } else {
+      let msgIds: string [] = this.parentMsgIdsMap.get(chatId)
+      msgIds.push(parentId)
+  
+      const diff = msgIds.length - this.parentMsgThreshold
+      if (diff > 0) {
+        const delMsgId = msgIds[diff - 1]
+        msgIds.splice(0, diff)
+        if (delMsgId != undefined) {
+          chatGPTAPI.resetSession(delMsgId)
+        }
+        
+      }
+      this.parentMsgIdsMap.set(chatId, msgIds)
     }
   }
 
