@@ -65,7 +65,7 @@ export class ChatGPTAPIWrapper {
     const messageStore = this.api._messageStore
     let nextMessageId = messageId
     while (true) {
-      const nextMessage = await messageStore.get(messageId)
+      const nextMessage = await messageStore.get(nextMessageId)
       if (nextMessage === undefined) {
         break
       }
