@@ -63,17 +63,17 @@ export class ChatGPTAPIWrapper {
   resetSession = async (messageId: string) => {
     // @ts-ignore
     const messageStore = this.api._messageStore
-    let nextMessageId = messageId
+    let currentMessageId = messageId
     while (true) {
-      const nextMessage = await messageStore.get(messageId)
-      if (nextMessage === undefined) {
+      const currentMessage = await messageStore.get(currentMessageId)
+      if (currentMessage === undefined) {
         break
       }
-      await messageStore.delete(messageId)
-      if (nextMessage.parentMessageId === undefined) {
+      await messageStore.delete(currentMessageId)
+      if (currentMessage.parentMessageId === undefined) {
         break
       }
-      nextMessageId = nextMessage.parentMessageId
+      currentMessageId = currentMessage.parentMessageId
     }
   }
 }
