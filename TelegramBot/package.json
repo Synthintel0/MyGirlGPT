@@ -16,6 +16,7 @@
     "@grammyjs/files": "^1.0.4",
     "@grammyjs/menu": "^1.2.0",
     "@grammyjs/parse-mode": "^1.7.1",
+    "@keyv/redis": "^2.6.1",
     "axios": "^1.4.0",
     "base64-js": "^1.5.1",
     "chatgpt": "^5.2.4",
