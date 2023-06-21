@@ -22,7 +22,7 @@ export class ChatGPTAPIWrapper {
     } else {
       kvStore = new QuickLRU<string, any>({ maxSize: 10000 })
     }
-    let messageStore = new Keyv({ store: kvStore, namespace: 'myGirl-chatHistory' })
+    let messageStore = new Keyv({ store: kvStore, namespace: 'MyGirlGPT-chatHistory' })
   
     this.api = new ChatGPTAPI({
       apiKey: 'sk-test',
