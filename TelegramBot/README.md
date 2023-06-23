@@ -27,6 +27,8 @@ START_COMMAND_REPLY_PHOTO='./src/assets/hello.jpg' # file path
 WEBSOCKET_SERVER="ADDRESS OF BOT"
 GPT_SERVER="OPENAI API ADDRESS OF TEXT-GENERATION-WEBUI"
 TTS_SERVER="ADDRESS FOR TTS"
+# alternative. If you want to save chat message for a long time, even if mygirl restarts, it will not be lost. You can achieve this by setting the redis address
+REDIS_SERVER="ADDRESS OF REDIS"
 ```
 
 ## Run the bot & mygirl
@@ -42,6 +44,7 @@ Following Env need to be set.
 1. BOT_TOKEN
 2. GPT_SERVER
 3. TTS_SERVER
+4. REDIS_SERVER
 ```
 ## Docker Local Setup
 ```cmd

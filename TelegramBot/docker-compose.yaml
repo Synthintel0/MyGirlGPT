@@ -24,6 +24,7 @@ services:
       WEBSOCKET_SERVER: http://bot:8081
       GPT_SERVER: "OPENAI API ADDRESS OF TEXT-GENERATION-WEBUI"
       TTS_SERVER: "ADDRESS FOR TTS"
+      REDIS_SERVER: "ADDRESS OF REDIS" # alternative
     ports:
       - 8081:8081
     restart: unless-stopped

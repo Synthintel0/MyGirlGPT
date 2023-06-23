@@ -1,5 +1,8 @@
 import _ from 'lodash'
 import dotenv from 'dotenv'
+import Keyv from 'keyv'
+import QuickLRU from 'quick-lru'
+import KeyvRedis from '@keyv/redis'
 
 import { ExchangeMessageData, GPTResponseData } from '../types/index.js'
 import { chatGPTAPI } from './chatgpt-api.mjs'
@@ -18,17 +21,30 @@ class App {
     websocketClient.onMessageRequest(this.handleMessageRequest)
 
     this.websocketClient = websocketClient
+
+    // @ts-ignore
+    const redisServer = process.env.REDIS_SERVER
+    let kvStore: KeyvRedis | QuickLRU<any, any>
+    if (redisServer !== undefined && _.startsWith(redisServer, 'redis://')) {
+      kvStore = new KeyvRedis(redisServer)
+    } else {
+      kvStore = new QuickLRU<string, any>({ maxSize: 10000 })
+    }
+    this.parentMessageIds = new Keyv<any, any>({
+      store: kvStore,
+      namespace: 'MyGirlGPT-parentMsgId',
+    })
   }
 
   private websocketClient: WebsocketClient
 
-  private parentMessageIds: Map<string, string> = new Map()
+  private parentMessageIds: Keyv<string> | undefined
 
-  private handleMessageRequest = (data: ExchangeMessageData) => {
+  private handleMessageRequest = async (data: ExchangeMessageData) => {
     console.log('handleMessageRequest', data)
     if (data.message.type === 'command') {
       if (data.message.content === 'reset') {
-        const parentMessageId = this.parentMessageIds.get(data.chat.id)
+        const parentMessageId = await this.parentMessageIds?.get(data.chat.id)
         if (parentMessageId !== undefined) {
           chatGPTAPI.resetSession(parentMessageId)
         }
@@ -36,16 +52,16 @@ class App {
     } else if (data.message.type === 'text') {
       chatGPTAPI
         .sendMessage(data.message.content, {
-          parentMessageId: this.parentMessageIds.get(data.chat.id),
+          parentMessageId: await this.parentMessageIds?.get(data.chat.id),
           completionParams: {
             temperature: 0.5,
             top_p: 0.73,
             presence_penalty: 1.1,
           },
         })
-        .then((result) => {
+        .then(async (result) => {
           console.log('chatGPTAPI.sendMessage result', result)
-          this.parentMessageIds.set(data.chat.id, result.id)
+          await this.parentMessageIds?.set(data.chat.id, result.id)
 
           const { content: textContent, imageBase64: imageContent } = JSON.parse(result.text) as GPTResponseData
           const textContentParts = splitParagraphToShorterParts(textContent)
