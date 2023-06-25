@@ -178,7 +178,6 @@ class Handler(BaseHTTPRequestHandler):
                 'name1':name1,
                 'name2':name2,
                 "chat_prompt_size":2048
-                
             }
             # 
             # fixup absolute 0.0's
@@ -226,7 +225,6 @@ class Handler(BaseHTTPRequestHandler):
                 system_token_count = len(encode(system_msg)[0])
                 remaining_tokens = req_params['truncation_length'] - req_params['max_new_tokens'] - system_token_count
                 chat_msg = ''
-                pic_generation=chat_msgs[-1]
                 while chat_msgs:
                     new_msg = chat_msgs.pop()
                     new_msg=character_utils.replace_openai_names(new_msg,req_params['name1'],req_params['name2'])
@@ -248,9 +246,6 @@ class Handler(BaseHTTPRequestHandler):
                     # prompt = chat_msg + '\nassistant: '
                     prompt = req_params['context']+ chat_msg + '\n'+req_params['name2']+':'
                 token_count = len(encode(prompt)[0])
-
-                # generate pic into user inputs
-                shouldGetPic=picgenerate.check_need_create_pic(messages_for_pic)
                 
                 # pass with some expected stop strings.
                 # some strange cases of "##| Instruction: " sneaking through.
@@ -309,8 +304,7 @@ class Handler(BaseHTTPRequestHandler):
 
             # generate reply #######################################
             if debug:
-                # print({'prompt': prompt, 'req_params': req_params, 'stopping_strings': stopping_strings})
-                print({'prompt': prompt})
+                print({'prompt': prompt, 'req_params': req_params, 'stopping_strings': stopping_strings})
             generator = generate_reply(prompt, req_params, stopping_strings=stopping_strings)
 
             answer = ''
@@ -440,7 +434,9 @@ class Handler(BaseHTTPRequestHandler):
                     "imageBase64":picBase64
                 }
                 # just gengerate pic in chat mode
-               
+                messages_for_pic.append({"role": "assistant", "content": answer })
+                shouldGetPic=picgenerate.check_need_create_pic(messages_for_pic)
+
                 if shouldGetPic:
                     messages_for_pic.append({"role": "assistant", "content": answer })
                     picBase64= picgenerate.get_picture(messages_for_pic)

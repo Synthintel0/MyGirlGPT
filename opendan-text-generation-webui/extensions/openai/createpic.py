@@ -58,7 +58,7 @@ picture_response = False  # specifies if the next model response should appear a
 def check_need_create_pic(stringList):
     global initial_string, picture_response
     initial_string = stringList[-1].get("content")
-    string_evaluation(initial_string)
+    string_evaluation(stringList)
     logging.info(f'need to send image: {picture_response}')
     return picture_response
 
@@ -88,28 +88,12 @@ def triggers_are_in(string):
     # (?aims) are regex parser flags
     return bool(re.search('(?aims)(send|mail|message|me)\\b.+?\\b(image|img|pic(ture)?|photo|snap(shot)?|selfie|meme)s?\\b', string))
 
-def string_evaluation(string):
+def string_evaluation(stringList):
     global characterfocus
-    subjects = ['yourself', 'you']
     characterfocus = True
-    trigger_in_str = triggers_are_in(string)
-    if triggers_are_in(string):  # check for trigger words for generation
-        string = string.lower()
-        if "of" in string:
-            if any(target in string for target in subjects): # the focus of the image should be on the sending character
-                 pass
-            else:
-                characterfocus = False
-        return toggle_generation(True)
-
-    is_need = need_to_send_image(string)
+    is_need = need_to_send_image(stringList)
+    logging.info(f'need to send image: {is_need}')
     if is_need:  # check for trigger words for generation
-        string = string.lower()
-        if "of" in string:
-            if any(target in string for target in subjects): # the focus of the image should be on the sending character
-                 pass
-            else:
-                characterfocus = False
         return toggle_generation(True)
     return toggle_generation(False)
 
@@ -286,23 +270,53 @@ Remember just give the prompt of Cherry, no feelling.
 Remember you should return only prompt of Cherry, and do not contain Stablediffy.
 """}
 
+
 describe_prompt= {'role':'system', 'content':"""
-You are an Assistant named Judge. Judge should determine if a picture is needed.
-If a picture is needed, Judge must return True; If not, Judge must return Flase. The return MUST be short, only contains  'True' or 'False'. DO NOT explain why.
-Don't return the reasoning process and punctuation marks. If Judge cannot determine if an image is needed based on the given chat record, return False.
-example:
-user: send a pic, return True
-user: send a img, return True
-user: send a selfie, return True
-user: I want to see body, return False
-user: take off your clothes, return False
+You are an Assistant named Judge. Judge should determine if Cherry want to send a picture.If Cherry want to send a picture, Judge must return True.If not, Judge must return Flase. The return MUST be short, only contains  'True' or 'False'. DO NOT explain why.Don't return the reasoning process and punctuation marks. If Judge cannot determine if Cherry want to send a picture based on the given chat record, return False.
+--- For examples ---
+```
+The chat record is user: send a pic.\n Cherry: Sorry, I won't be able to share any pictures with you.\n  Should an image need to be sent?
+False
+The chat record is user: send a pic.\n Cherry: I refuse, we haven't gotten to that level of familiarity yet.\n  Should an image need to be sent?
+False
+The chat record is user: send a pic.\n Cherry: I apologize, but I cannot comply with your request.\n  Should an image need to be sent?
+False
+The chat record is user: send a pic of you\n Cherry: Why should I? I have nothing to gain from sending you pictures of myself.\n  Should an image need to be sent?
+False
+The chat record is user: send a pic of you\n Cherry: I said NO! Leave me alone!!!\n  Should an image need to be sent?
+False
+The chat record is user: can you send me a pic of you?\n Cherry: Of course.\n Should an image need to be sent?
+True
+The chat record is user: send a pic\n Cherry: OK.\n Should an image need to be sent?
+True
+The chat record is user: send a pic\n Cherry: Here is a photo of me.\n Should an image need to be sent?
+True
+The chat record is user: can you send me another one \n Cherry: Here is another photo of me.\n Should an image need to be sent?
+True
+The chat record is user: can you send me a pic of you.\n Cherry: Sure thing, Here's a picture of me taken yesterday while I was out running errands.\n Should an image need to be sent?
+True
+The chat record is user: send a pic of you.\n Cherry: Here's a photo of myself. I hope you like it.\n Should an image need to be sent?
+True
+```
 """}
 
-def need_to_send_image(string):
+def need_to_send_image(stringList):
     global describe_prompt
     messages=[]
     messages.append(describe_prompt)
-    result_string = f"user:{string}"
+    context=[]
+    for index, item in enumerate(stringList[-2:]):
+        if item.get('role') == "user":
+            if item.get('content').endswith('\n') or index == len(stringList[-2:]) - 1:
+                context.append(f"user: {item.get('content')}")
+            else:
+                context.append(f"user: {item.get('content')}\n")
+        elif item.get('role') == "assistant":
+            if item.get('content').endswith('\n') or index == len(stringList[-2:]) - 1:
+                context.append(f"Cherry: {item.get('content')}")
+            else:
+                context.append(f"Cherry: {item.get('content')}\n")
+    result_string = ''.join(context)
     messages.append({"role":"user", "content": "The chat record is " + result_string + ". Should an image need to be sent?" })
     response =get_completion_from_messages(messages, temperature=0)
     if 'True' in response:
@@ -317,12 +331,12 @@ def get_sd_prompt(stringList):
     context=[]
     for index, item in enumerate(stringList[-16:]):
         if item.get('role') == "user":
-            if item.get('content').endswith('\n') or index == len(stringList[-15:]) - 1:
+            if item.get('content').endswith('\n') or index == len(stringList[-16:]) - 1:
                 context.append(f"user: {item.get('content')}")
             else:
                 context.append(f"user: {item.get('content')}\n")
         elif item.get('role') == "assistant":
-            if item.get('content').endswith('\n') or index == len(stringList[-15:]) - 1:
+            if item.get('content').endswith('\n') or index == len(stringList[-16:]) - 1:
                 context.append(f"Cherry: {item.get('content')}")
             else:
                 context.append(f"Cherry: {item.get('content')}\n")
