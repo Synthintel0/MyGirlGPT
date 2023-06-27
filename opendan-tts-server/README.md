@@ -27,13 +27,13 @@ python main.py
 ### How to run in docker
 #### Build image by yourself
 ```
-docker build -t opendan-tts-server .
+docker build -t opendan-tts-server -f Dockerfile_with_model.
 docker run -d --name tts-server -p 6006:6006 opendan-tts-server 
 ```
-If you don't want to build image, you can use public image `synthintel2/opendan-tts-server`.
+If you don't want to build image, you can use public image `synthintel2/opendan-tts-server:with_model`.
 
 #### User public image
 ```
-docker pull synthintel2/opendan-tts-server
-docker run -d --name tts-server -p 6006:6006 synthintel2/opendan-tts-server
+docker pull synthintel2/opendan-tts-server::with_model
+docker run -d --name tts-server -p 6006:6006 synthintel2/opendan-tts-server:with_model
 ```

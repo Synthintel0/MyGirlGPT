@@ -1,0 +1,11 @@
+FROM continuumio/miniconda3
+RUN apt update && apt install espeak-ng ffmpeg -y
+WORKDIR /root
+ADD ./requirements.txt .
+RUN pip install -r requirements.txt
+ADD ./src .
+RUN python -m nltk.downloader punkt
+RUN echo 'from bark import preload_models \n\
+preload_models()' >> install_bark.py
+RUN python install_bark.py
+CMD ["python", "main.py"]
