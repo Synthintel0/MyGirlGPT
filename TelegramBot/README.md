@@ -3,7 +3,7 @@
 
 ## Cloning this repo
 ```cmd
-git clone https://github.com/Synthintel/MyGirlGPT
+git clone https://github.com/Synthintel0/MyGirlGPT
 cd MyGirlGPT/TelegramBot
 ```
 

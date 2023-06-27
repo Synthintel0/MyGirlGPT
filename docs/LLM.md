@@ -48,7 +48,7 @@ The up to date commands can be found here: https://pytorch.org/get-started/local
 #### 3. Install the web UI
 
 ```
-git clone https://github.com/Synthintel/MyGirlGPT
+git clone https://github.com/Synthintel0/MyGirlGPT
 cd MyGirlGPT/opendan-text-generation-webui
 pip install -r requirements.txt
 ```
