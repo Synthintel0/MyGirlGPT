@@ -31,7 +31,9 @@ class BotApp {
     bot.callbackQuery('turn-on-voice', this.handleCallbackQueryTurnOnVoice)
     bot.callbackQuery('turn-off-voice', this.handleCallbackQueryTurnOffVoice)
 
-    bot.catch = () => {}
+    bot.catch((err) => {
+      console.error("bot catch error:", err);
+    });
 
     this.bot = bot
   }
