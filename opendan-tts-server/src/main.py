@@ -98,4 +98,4 @@ async def tts_bark(item: schemas.generate_web):
 if __name__ == '__main__':
 
     print_env(server_port)
-    uvicorn.run(app="main:app", host="0.0.0.0", port=server_port, reload=True)
+    uvicorn.run(app="main:app", host="0.0.0.0", port=server_port, reload=False)
