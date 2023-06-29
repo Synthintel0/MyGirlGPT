@@ -222,6 +222,7 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
                 model=model,
                 messages=messages,
                 temperature=temperature, # this is the degree of randomness of the model's output
+                timeout=3, # set request timeout to 3 seconds
             )
             break
         except Exception as e:
