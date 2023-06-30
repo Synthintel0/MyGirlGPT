@@ -25,7 +25,8 @@ logging.basicConfig(
 )
 _ = load_dotenv(find_dotenv()) # read local .env file
 openai.api_key  = os.getenv('OPENAI_API_KEY')
-openai.api_base = os.getenv('OPENAI_API_BASE')
+if os.getenv('OPENAI_API_BASE') != None and os.getenv('OPENAI_API_BASE') != '':
+  openai.api_base = os.getenv('OPENAI_API_BASE')
 sd_address = os.getenv('SD_ADDRESS')
 
 # parameters which can be customized in settings.json of webui
