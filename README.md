@@ -54,6 +54,12 @@ Join us on Telegram to chat with Cherry and be part of the MyGirlGPT community! 
    Follow the instructions outlined in the [How to run TelegramBot](TelegramBot/README.md) to start the bot.  
 Now you can have fun chatting with your AI girl!!!
 
+
+## [How to Run MyGirlGPT in RunPod](docker/README.md)
+
+### What's RunPod
+> [RunPod](https://www.runpod.io) is a cloud computing platform, primarily designed for AI and machine learning applications. 
+
 ## Features
 * Telegram Integration: Connect directly with your AI girlfriend through Telegram, allowing you to send and receive messages seamlessly.
 * Local Large Language Model (LLM): Powered by [text-generation-webui](https://github.com/oobabooga/text-generation-webui) with better privacy protection.
