@@ -71,6 +71,13 @@ The model is [TehVenom/Pygmalion-Vicuna-1.1-7b](https://huggingface.co/TehVenom/
 ## Contributing
 We welcome pull requests. If you plan to make significant changes, please open an issue first to discuss them.
 
+
+
+
+## **⭐Star History**
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Synthintel0/MyGirlGPT&type=Date)](https://api.star-history.com/svg?repos=Synthintel0/MyGirlGPT&type=Date)
+
 ## License
 This project is licensed under the MIT License.
 
